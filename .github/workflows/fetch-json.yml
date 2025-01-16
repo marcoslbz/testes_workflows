@@ -26,13 +26,13 @@ jobs:
 
       # Executar o script Python para gerar o JSON
       - name: Run Python script
-        run: python docs/data/req.py
+        run: python data/req.py
 
       # Fazer commit do novo JSON no repositório
       - name: Commit and Push JSON
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add docs/data/data.json
+          git add data/data.json
           git commit -m "Atualiza data.json"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
