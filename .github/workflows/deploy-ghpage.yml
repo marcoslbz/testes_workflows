@@ -8,6 +8,8 @@ on:
       - 'docs/**'      # Monitora mudanças dentro da pasta docs
       - 'src/**'       # Monitora mudanças em arquivos relacionados ao seu conteúdo
       - '.github/workflows/**' # Monitora mudanças no próprio workflow
+  workflow_dispatch:      # Permite rodar manualmente
+
 
 jobs:
   deploy:
