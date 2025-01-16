@@ -19,11 +19,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
-
-      # Instalar dependências (caso necessário para o `src.js`)
-      - name: Install dependencies
-        run: npm install
-
+          
       # Fazer build do projeto (se necessário)
       - name: Build Project
         run: |

@@ -2,7 +2,7 @@
 async function loadJsonAndRender() {
     try {
       // Caminho para o arquivo JSON
-      const response = await fetch('../data/data.json');
+      const response = await fetch('./data/data.json');
       const jsonData = await response.json();
   
       // Seleciona os resultados do JSON

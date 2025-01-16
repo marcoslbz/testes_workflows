@@ -6,7 +6,7 @@ import os
 response = requests.get('https://randomuser.me/api/')
 data = response.json()
 
-json_path = os.path.join('data', 'data.json')
+json_path = os.path.join('docs', 'data', 'data.json')
 
 
 # Salvar a resposta em um arquivo JSON
