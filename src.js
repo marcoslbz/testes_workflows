@@ -33,3 +33,4 @@ async function loadJsonAndRender() {
   // Chama a função para carregar e renderizar os dados
   loadJsonAndRender();
   
+  
