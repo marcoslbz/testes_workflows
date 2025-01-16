@@ -2,7 +2,7 @@ name: Fetch JSON
 
 on:
   schedule:
-    - cron: "0 * * * *"  # Executa a cada hora
+    - cron: "*/5 * * * *"  # Executa a cada hora
   workflow_dispatch:      # Permite rodar manualmente
 
 jobs:
