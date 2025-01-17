@@ -1,0 +1,58 @@
+name: Fetch JSON and Deploy to GitHub Pages
+
+on:
+  # Executa manualmente ou em push para a branch main
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  fetch-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout do repositório
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Configurar Python
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      # Instalar dependências necessárias
+      - name: Install dependencies
+        run: pip install requests
+
+      # Executar o script Python para atualizar o JSON
+      - name: Run Python script
+        run: python data/req.py
+
+      # Fazer commit do novo JSON (se houve alterações)
+      - name: Commit and Push JSON
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git diff --exit-code || (git add data/data.json && git commit -m "Atualiza data.json")
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
+
+      # Configurar GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Fazer upload do repositório como artefato para as Pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      # Deploy para o GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
