@@ -6,7 +6,7 @@ on:
   push:
     branches: ["main"]
   schedule:
-    - cron: "0 * * * *"  # Executa a cada hora
+    - cron: "*/10 * * * *"  # Executa a cada hora
 
 permissions:
   contents: write
