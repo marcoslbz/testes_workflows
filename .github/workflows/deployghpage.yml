@@ -5,6 +5,8 @@ on:
   workflow_dispatch:
   push:
     branches: ["main"]
+  schedule:
+    - cron: "0 * * * *"  # Executa a cada hora
 
 permissions:
   contents: write
@@ -19,6 +21,22 @@ jobs:
       # Checkout do repositório
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      # Configurar Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Versão do Node.js, pode ser ajustada conforme necessário
+      
+      # Instalar dependências
+      - name: Install dependencies
+        run: |
+          npm install axios p-limit fs  # Instalar as dependências que você precisa
+
+      # Executar o script obras_map.mjs
+      - name: Run obras_map.mjs
+        run: |
+          node --experimental-modules TestesMapa/obrasgov/obras_map.mjs  # Executa o script .mjs    
 
       # Configurar GitHub Pages
       - name: Setup Pages

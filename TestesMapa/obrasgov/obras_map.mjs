@@ -1,6 +1,6 @@
-const axios = require('axios');
-const fs = require('fs');
-const pLimit = require('p-limit');
+import axios from 'axios';
+import fs from 'fs';
+import pLimit from 'p-limit';
 
 const cache = new Map(); // Cache local para armazenar geometrias já buscadas
 const limit = pLimit(1); // Limitar a 1 requisição simultânea para reduzir carga
@@ -84,8 +84,13 @@ function extractLatLong(geometriaWkt) {
 // Função para salvar dados em um arquivo JSON
 async function saveToJsonFile(data, filename) {
     try {
-        fs.writeFileSync(filename, JSON.stringify(data, null, 2), 'utf-8');
-        console.log(`Dados salvos no arquivo ${filename}`);
+        const jsonData = {
+            timestamp: new Date().toISOString(), // Adiciona o timestamp
+            obras: data // Coloca as obras no campo 'obras'
+        };
+
+        fs.writeFileSync(filename, JSON.stringify(jsonData, null, 2), 'utf-8');
+        console.log(`Dados salvos no arquivo ${filename} com timestamp ${jsonData.timestamp}`);
     } catch (error) {
         console.error(`Erro ao salvar o arquivo ${filename}:`, error.message);
     }

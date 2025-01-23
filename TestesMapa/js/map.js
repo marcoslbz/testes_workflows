@@ -43,7 +43,7 @@ fetch('./obrasgov/obras_com_lat_long.json') // Caminho do JSON
         return response.json();
     })
     .then(data => {
-        console.log(data)
+        console.log("Data do JSON:", data.timestamp);
         const pinIcons = {
             concluida: L.icon({
                 iconUrl: './js/pins/concluida.png',
@@ -71,7 +71,7 @@ fetch('./obrasgov/obras_com_lat_long.json') // Caminho do JSON
             }),
         };
         // Varrer as obras e criar marcadores
-        data.forEach((obra, index) => {
+        data.obras.forEach((obra, index) => {
             const { nome, fontesDeRecurso, latitude, longitude, situacao } = obra;
             
             //Verifica se tem latitude e longitude no JSON

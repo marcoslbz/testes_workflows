@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "leaflet": "^1.9.4"
+    "axios": "^1.7.9",
+    "leaflet": "^1.9.4",
+    "p-limit": "^6.2.0"
   }
 }
