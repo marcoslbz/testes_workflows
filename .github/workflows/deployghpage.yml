@@ -6,7 +6,7 @@ on:
   push:
     branches: ["main"]
   schedule:
-    - cron: "*/10 * * * *"  # Executa a cada hora
+    - cron: "0 * * * *"  # Executa a cada hora
 
 permissions:
   contents: write
@@ -37,6 +37,14 @@ jobs:
       - name: Run obras_map.mjs
         run: |
           node --experimental-modules TestesMapa/obrasgov/obras_map.mjs  # Executa o script .mjs    
+      
+      # Commit das mudanças
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add TestesMapa/  # Adicionar mudanças feitas pelo script
+          git commit -m "Atualização automática dos dados (via workflow)"
 
       # Configurar GitHub Pages
       - name: Setup Pages
