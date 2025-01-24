@@ -34,13 +34,13 @@ jobs:
           npm install axios p-limit fs  # Instalar as dependências que você precisa
 
       # Executar o script obras_map.mjs
-     # - name: Run obras_map.mjs
-      #  run: |
-       #   node --experimental-modules TestesMapa/obrasgov/obras_map.mjs  # Executa o script .mjs    
-      
-      - name: Create temporary JSON
+      - name: Run obras_map.mjs
         run: |
-          echo '{"teste": "isso é só um teste"}' > TestesMapa/obrasgov/obras_com_lat_long.json
+          node --experimental-modules TestesMapa/obrasgov/obras_map.mjs    
+      
+      #- name: Create temporary JSON
+       # run: |
+        #  echo '{"teste": "isso é só um teste"}' > TestesMapa/obrasgov/obras_com_lat_long.json
         
       # Commit das mudanças
       # Fazer commit do novo JSON (se houve alterações)
