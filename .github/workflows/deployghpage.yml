@@ -44,7 +44,7 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git diff --exit-code || (git add data/data.json && git commit -m "Atualiza data.json")
+          git diff --exit-code || (git add TestesMapa/obrasgov/*.json && git commit -m "Atualiza JSON automaticamente")
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
 
       # Configurar GitHub Pages
