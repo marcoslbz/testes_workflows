@@ -39,12 +39,13 @@ jobs:
           node --experimental-modules TestesMapa/obrasgov/obras_map.mjs  # Executa o script .mjs    
       
       # Commit das mudanças
-      - name: Commit changes
+      # Fazer commit do novo JSON (se houve alterações)
+      - name: Commit and Push JSON
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add TestesMapa/  # Adicionar mudanças feitas pelo script
-          git commit -m "Atualização automática dos dados (via workflow)"
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git diff --exit-code || (git add data/data.json && git commit -m "Atualiza data.json")
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
 
       # Configurar GitHub Pages
       - name: Setup Pages
