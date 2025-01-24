@@ -42,10 +42,13 @@ jobs:
       # Fazer commit do novo JSON (se houve alterações)
       - name: Commit and Push JSON
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git diff --exit-code || (git add TestesMapa/obrasgov/*.json && git commit -m "Atualiza JSON automaticamente")
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@users.noreply.github.com"
+          git pull origin main
+          git add TestesMapa/obrasgov/seu_arquivo.json
+          git commit -m "Atualiza data.json"
+          git push
+    
 
       # Configurar GitHub Pages
       - name: Setup Pages
