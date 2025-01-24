@@ -34,10 +34,14 @@ jobs:
           npm install axios p-limit fs  # Instalar as dependências que você precisa
 
       # Executar o script obras_map.mjs
-      - name: Run obras_map.mjs
-        run: |
-          node --experimental-modules TestesMapa/obrasgov/obras_map.mjs  # Executa o script .mjs    
+     # - name: Run obras_map.mjs
+      #  run: |
+       #   node --experimental-modules TestesMapa/obrasgov/obras_map.mjs  # Executa o script .mjs    
       
+      - name: Create temporary JSON
+        run: |
+          echo '{"teste": "isso é só um teste"}' > TestesMapa/obrasgov/obras_com_lat_long.json
+        
       # Commit das mudanças
       # Fazer commit do novo JSON (se houve alterações)
       - name: Commit and Push JSON
@@ -45,7 +49,7 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@users.noreply.github.com"
           git pull origin main
-          git add TestesMapa/obrasgov/obras_com_lat_long.json
+          git add -f TestesMapa/obrasgov/obras_com_lat_long.json
           git commit -m "Atualiza data.json"
           git push
     
